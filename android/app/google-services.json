@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "388385877276",
+    "project_id": "hirfati-f6347",
+    "storage_bucket": "hirfati-f6347.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388385877276:android:66b982a850f24ddbe35ed9",
+        "android_client_info": {
+          "package_name": "com.example.hirfati"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388385877276-a358jfp5apkg8krkjvrnk7eg5fjht9gh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hirfati",
+            "certificate_hash": "22ccc7c1f4e35373ed0e57a238aa20b0f3a5d5ac"
+          }
+        },
+        {
+          "client_id": "388385877276-43e92buincj3bjoqdisdquj776aajmp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJUXHyE7wnSk7NpH_9GEl9qhMi9zPBSWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388385877276-43e92buincj3bjoqdisdquj776aajmp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
