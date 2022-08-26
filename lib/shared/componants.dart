@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import'package:flutter/material.dart';
 import '../../shared/theme.dart';
+import '../modules/registerpage/registerpage.dart';
 
 
 Widget CategorieBuilder(String catIcon,String catTitle,Function catOnPressed){
@@ -29,30 +30,3 @@ return GestureDetector(onTap:(){},child:Container(
 }
 
 
-
-
-/*Widget TextFieldBuilder(TextEditingController Controller, String? Function(String?) validatorFunc,String hintTxt ){
-  return Container(
-                              height: 50,
-                              child: TextFormField(
-                                  //autovalidateMode:AutovalidateMode.always ,
-                                  controller: Controller,
-                                  validator:validatorFunc ,
-                                  cursorColor: Colors.amber,
-                                  decoration: InputDecoration(
-                                      isDense: true,
-                                      hintText:hintTxt ,
-                                      focusColor: Colors.amber,
-                                      errorBorder: InputBorder.none,
-                                      focusedErrorBorder: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: BorderSide(
-                                              color: Color.fromARGB(
-                                                  131, 243, 8, 231))),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)))),
-                            );
-}*/

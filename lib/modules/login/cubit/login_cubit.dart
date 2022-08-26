@@ -38,7 +38,7 @@ class LoginCubit extends Cubit<LoginState> {
       {required String email,required int buttom_id,
       required String password,
       required String name,
-      String phoneNumber = ""}) async {
+      String phoneNumber = "",String madina="",String daira="",String wilaya="",List<String>?jobs=null}) async {
     emit(RegisterLoading());
     Hirfati.myAuth
         .createUserWithEmailAndPassword( email: email, password: password)
@@ -51,6 +51,7 @@ class LoginCubit extends Cubit<LoginState> {
           'password': password,
           'name': name,
           'phonenumber': phoneNumber,
+          
           'user_type':buttom_id==1?'normal_user':'worker',
         }).then((value) {
          
