@@ -34,11 +34,11 @@ class LoginCubit extends Cubit<LoginState> {
     }).catchError((e) => emit(LoginFailed("Wrong email or password.")));
   }
 
-  signInNewUser(
-      {required String email,required int buttom_id,
+  signUpNewWorker(
+      {required String email,
       required String password,
       required String name,
-      String phoneNumber = "",String madina="",String daira="",String wilaya="",List<String>?jobs=null}) async {
+      required String phoneNumber,required String madina,required String daira,required String wilaya,required List<String>?jobs}) async {
     emit(RegisterLoading());
     Hirfati.myAuth
         .createUserWithEmailAndPassword( email: email, password: password)
@@ -51,8 +51,36 @@ class LoginCubit extends Cubit<LoginState> {
           'password': password,
           'name': name,
           'phonenumber': phoneNumber,
-          
-          'user_type':buttom_id==1?'normal_user':'worker',
+          'user_type':'worker',
+          'madina':madina,
+          'daira':daira,
+          'wilaya':wilaya,
+        }).then((value) {
+         
+                  emit(RegisterDone());
+               
+        }).catchError(
+                (error) => emit(RegisterFailed('error happend ,try again')));
+      });
+    
+  }
+
+  signUpNewUser(
+      {required String email,
+      required String password,
+      required String name,
+      }) async {
+    emit(RegisterLoading());
+    Hirfati.myAuth
+        .createUserWithEmailAndPassword( email: email, password: password)
+        .then((value1) {
+      
+        Hirfati.myFirestore.collection('users').doc(value1.user!.uid.toString()).set({
+          'email': email,
+          'password': password,
+          'name': name,
+          'user_type':'user',
+         
         }).then((value) {
          
                   emit(RegisterDone());

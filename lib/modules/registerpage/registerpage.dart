@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage>
   //const OnboardingPages({Key? key}) : super(key: key);
   late GoogleMapController myMapController;
   late Map<String, dynamic> response;
-  TextEditingController searchZone = TextEditingController();
+  
   Set<Marker> mapMarkers = Set();
 
   TextEditingController nameFieldController = TextEditingController();
@@ -244,8 +244,8 @@ class _RegisterPageState extends State<RegisterPage>
                                         if (myFormKey1.currentState!
                                             .validate()) {
                                           BlocProvider.of<LoginCubit>(context)
-                                              .signInNewUser(
-                                                  buttom_id: 1,
+                                              .signUpNewUser(
+                                                  
                                                   email:
                                                       emailFieldController.text,
                                                   name:
@@ -556,8 +556,7 @@ class _RegisterPageState extends State<RegisterPage>
                                               .then((value) {
                                             response = json.decode(value.body)
                                                 as Map<String, dynamic>;
-                                            searchZone.text =
-                                                response["address"].toString();
+                                           
                                             setState(() {});
                                           });
                                         });
@@ -571,8 +570,10 @@ class _RegisterPageState extends State<RegisterPage>
                                           if (myFormKey2.currentState!
                                               .validate()) {
                                             BlocProvider.of<LoginCubit>(context)
-                                                .signInNewUser(
-                                                    buttom_id: 2,
+                                                .signUpNewWorker(
+                                                    daira:response["address"]['city'] ,
+                                                    madina:response["address"]['town']  ,wilaya:response["address"]['state']  ,phoneNumber:phoneFieldController.text ,jobs: widget.userJobs
+                                                    ,
                                                     email: emailFieldController
                                                         .text,
                                                     name: nameFieldController
