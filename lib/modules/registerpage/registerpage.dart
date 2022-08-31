@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -452,7 +453,7 @@ class _RegisterPageState extends State<RegisterPage>
                                       onPressed: () {
                                         if (myFormKey2.currentState!
                                             .validate()) {
-                                              
+                                              FocusManager.instance.primaryFocus!.unfocus();
                                           myPage.nextPage(
                                               duration:
                                                   Duration(milliseconds: 300),
@@ -558,11 +559,11 @@ class _RegisterPageState extends State<RegisterPage>
                                               .post(Uri.parse(
                                                   'https://nominatim.openstreetmap.org/reverse?format=json&lat=${locationCordinates.latitude}&zoom=10&lon=${locationCordinates.longitude}&addressdetails=1&namedetails=1&email=ayoublarbaoui004@gmail.com'))
                                               .then((value) {
+                                                if(value.body!=null || value.body!=""){
                                             response = json.decode(value.body)
                                                 as Map<String, dynamic>;
-                                            print("99999999999999999999999" +
-                                                response["address"]['town']);
-                                            setState(() {});
+                                            
+                                            setState(() {});}
                                           });
                                         });
                                       },
