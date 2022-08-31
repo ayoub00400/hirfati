@@ -55,6 +55,7 @@ class LoginCubit extends Cubit<LoginState> {
           'madina':madina,
           'daira':daira,
           'wilaya':wilaya,
+          'jobs':jobs
         }).then((value) {
          
                   emit(RegisterDone());

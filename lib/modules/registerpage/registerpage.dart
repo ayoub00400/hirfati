@@ -22,8 +22,8 @@ class _RegisterPageState extends State<RegisterPage>
     with SingleTickerProviderStateMixin {
   //const OnboardingPages({Key? key}) : super(key: key);
   late GoogleMapController myMapController;
-  late Map<String, dynamic> response;
-  
+  Map<String, dynamic> response = {};
+
   Set<Marker> mapMarkers = Set();
 
   TextEditingController nameFieldController = TextEditingController();
@@ -245,7 +245,6 @@ class _RegisterPageState extends State<RegisterPage>
                                             .validate()) {
                                           BlocProvider.of<LoginCubit>(context)
                                               .signUpNewUser(
-                                                  
                                                   email:
                                                       emailFieldController.text,
                                                   name:
@@ -305,7 +304,7 @@ class _RegisterPageState extends State<RegisterPage>
                                           //autovalidateMode:AutovalidateMode.always ,
                                           controller: name1FieldController,
                                           validator: (_) {
-                                            if (nameFieldController.text ==
+                                            if (name1FieldController.text ==
                                                 '') {
                                               return 'empty field';
                                             }
@@ -338,14 +337,15 @@ class _RegisterPageState extends State<RegisterPage>
                                           //autovalidateMode:AutovalidateMode.always ,
                                           controller: email1FieldController,
                                           validator: (_) {
-                                            if (emailFieldController.text ==
+                                            if (email1FieldController.text ==
                                                 '') {
                                               return 'empty field';
                                             } else {
                                               if (!RegExp(
                                                       '[a-z0-9]+@[a-z]+\.[a-z]{2,3}')
-                                                  .hasMatch(emailFieldController
-                                                      .text)) {
+                                                  .hasMatch(
+                                                      email1FieldController
+                                                          .text)) {
                                                 return 'Wrong email format';
                                               } else {
                                                 return null;
@@ -381,11 +381,11 @@ class _RegisterPageState extends State<RegisterPage>
                                             controller:
                                                 password1FieldController,
                                             validator: (_) {
-                                              if (passwordFieldController
+                                              if (password1FieldController
                                                   .text.isEmpty) {
                                                 return 'empty field';
                                               } else {
-                                                if (passwordFieldController
+                                                if (password1FieldController
                                                         .text.length <
                                                     6) {
                                                   return 'password must be at least 6 characters';
@@ -450,10 +450,14 @@ class _RegisterPageState extends State<RegisterPage>
                                     ),
                                     MaterialButton(
                                       onPressed: () {
-                                        myPage.nextPage(
-                                            duration:
-                                                Duration(milliseconds: 300),
-                                            curve: Curves.linear);
+                                        if (myFormKey2.currentState!
+                                            .validate()) {
+                                              
+                                          myPage.nextPage(
+                                              duration:
+                                                  Duration(milliseconds: 300),
+                                              curve: Curves.linear);
+                                        } else {}
                                       },
                                       color: Color.fromARGB(255, 248, 199, 250),
                                       height: 46,
@@ -556,7 +560,8 @@ class _RegisterPageState extends State<RegisterPage>
                                               .then((value) {
                                             response = json.decode(value.body)
                                                 as Map<String, dynamic>;
-                                           
+                                            print("99999999999999999999999" +
+                                                response["address"]['town']);
                                             setState(() {});
                                           });
                                         });
@@ -566,23 +571,35 @@ class _RegisterPageState extends State<RegisterPage>
                                   BlocBuilder<LoginCubit, LoginState>(
                                     builder: (context, state) {
                                       return MaterialButton(
-                                        onPressed: () {
-                                          if (myFormKey2.currentState!
-                                              .validate()) {
-                                            BlocProvider.of<LoginCubit>(context)
-                                                .signUpNewWorker(
-                                                    daira:response["address"]['city'] ,
-                                                    madina:response["address"]['town']  ,wilaya:response["address"]['state']  ,phoneNumber:phoneFieldController.text ,jobs: widget.userJobs
-                                                    ,
-                                                    email: emailFieldController
-                                                        .text,
-                                                    name: nameFieldController
-                                                        .text,
-                                                    password:
-                                                        passwordFieldController
-                                                            .text);
-                                          } else {}
-                                        },
+                                        onPressed: response.isEmpty
+                                            ? null
+                                            : () {
+                                                BlocProvider.of<LoginCubit>(
+                                                        context)
+                                                    .signUpNewWorker(
+                                                        daira:
+                                                            response["address"]
+                                                                ['county'],
+                                                        madina:
+                                                            response["address"]
+                                                                ['town'],
+                                                        wilaya:
+                                                            response["address"]
+                                                                ['state'],
+                                                        phoneNumber:
+                                                            phoneFieldController
+                                                                .text,
+                                                        jobs: widget.userJobs,
+                                                        email:
+                                                            email1FieldController
+                                                                .text,
+                                                        name:
+                                                            name1FieldController
+                                                                .text,
+                                                        password:
+                                                            password1FieldController
+                                                                .text);
+                                              },
                                         color:
                                             Color.fromARGB(255, 248, 199, 250),
                                         height: 46,
