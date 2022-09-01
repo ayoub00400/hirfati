@@ -17,10 +17,11 @@ String? paramPassed;
   void initState() {
     // TODO: implement initState
     super.initState();
-    paramPassed=ModalRoute.of(context)!.settings.arguments as String;
+    
   }
   @override
   Widget build(BuildContext context) {
+    paramPassed=ModalRoute.of(context)!.settings.arguments as String;
     return BlocProvider(
       create: (context) => CategoryCubit()..loadWorkerList(paramPassed!),
       child: Scaffold(appBar: AppBar(),body:SafeArea(child:BlocBuilder<CategoryCubit, CategoryState>(
@@ -32,7 +33,7 @@ String? paramPassed;
               if(BlocProvider.of<CategoryCubit>(context).workersList.isEmpty){
                 return Center(child:Text('Ohhhhh no there is no results '));
               }else{
-                return ListView.builder(itemCount:10 , itemBuilder: ((context, index) {
+                return ListView.builder(itemCount:BlocProvider.of<CategoryCubit>(context).workersList.length , itemBuilder: ((context, index) {
                 return workerListTileBuilder(BlocProvider.of<CategoryCubit>(context).workersList[index]);
                 
               }),);
