@@ -99,7 +99,7 @@ Widget build(BuildContext context){
                     child: Row(
                         children: jobData
                             .map((e) => CategorieBuilder(
-                                e['img_path']!, e['jobtitle']!, () {}))
+                                e['img_path']!, e['jobtitle']!,context))
                             .toList()))),
             Container(
                 width: double.maxFinite,

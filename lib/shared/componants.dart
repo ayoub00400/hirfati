@@ -1,13 +1,24 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import'package:flutter/material.dart';
 import '../../shared/theme.dart';
+import '../main.dart';
+import '../modules/category/category.dart';
 import '../modules/registerpage/registerpage.dart';
 
 
-Widget CategorieBuilder(String catIcon,String catTitle,Function catOnPressed){
 
-return GestureDetector(onTap:(){},child:Container(
+Widget workerListTileBuilder(Map<String,dynamic> workerData){
+return Container(height: 100, child:Text(workerData['name']),);
+}
+
+
+Widget CategorieBuilder(String catIcon,String catTitle,BuildContext context){
+
+return GestureDetector(onTap:(){
+Navigator.of(context).pushNamed(CategoryResultPage.routeName,arguments:catTitle);
+},child:Container(
   child:   Stack(children:[Container(margin:EdgeInsets.only(right:8,),height: 100,width: 100, decoration:BoxDecoration( color:Colors.purple[100], borderRadius: BorderRadius.circular(20)),)
     
     ,

@@ -8,6 +8,7 @@ import'package:hirfati/modules/homepage/homepage.dart';
 import'package:hirfati/modules/RegisterPage/RegisterPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'modules/category/category.dart';
 import 'modules/homepage/explore.dart';
 import 'modules/searchpage/searchpage.dart';
 
@@ -36,6 +37,7 @@ class Hirfati extends StatelessWidget {
         RegisterPage.routeName:(context)=>RegisterPage(),
         Explore.routeName:(context)=>Explore(),
         SearchPage.routeName:(context)=>SearchPage(),
+        CategoryResultPage.routeName:(context)=>CategoryResultPage(),
         
        },debugShowCheckedModeBanner: false,
        
