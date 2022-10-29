@@ -13,6 +13,7 @@ import '../login/cubit/login_cubit.dart';
 class RegisterPage extends StatefulWidget {
   static final String routeName = 'RegisterPage';
   List<String> userJobs = [];
+  late LatLng userLocation;
   @override
   _RegisterPageState createState() {
     return _RegisterPageState();
@@ -453,7 +454,8 @@ class _RegisterPageState extends State<RegisterPage>
                                       onPressed: () {
                                         if (myFormKey2.currentState!
                                             .validate()) {
-                                              FocusManager.instance.primaryFocus!.unfocus();
+                                          FocusManager.instance.primaryFocus!
+                                              .unfocus();
                                           myPage.nextPage(
                                               duration:
                                                   Duration(milliseconds: 300),
@@ -544,6 +546,7 @@ class _RegisterPageState extends State<RegisterPage>
                                         myMapController = mapController;
                                       },
                                       onTap: (locationCordinates) {
+                                        widget.userLocation=locationCordinates;
                                         mapMarkers.clear();
                                         mapMarkers.add(Marker(
                                             markerId: MarkerId('location'),
@@ -559,11 +562,13 @@ class _RegisterPageState extends State<RegisterPage>
                                               .post(Uri.parse(
                                                   'https://nominatim.openstreetmap.org/reverse?format=json&lat=${locationCordinates.latitude}&zoom=10&lon=${locationCordinates.longitude}&addressdetails=1&namedetails=1&email=ayoublarbaoui004@gmail.com'))
                                               .then((value) {
-                                                if(value.body!=null || value.body!=""){
-                                            response = json.decode(value.body)
-                                                as Map<String, dynamic>;
-                                            
-                                            setState(() {});}
+                                            if (value.body != null ||
+                                                value.body != "") {
+                                              response = json.decode(value.body)
+                                                  as Map<String, dynamic>;
+
+                                              setState(() {});
+                                            }
                                           });
                                         });
                                       },
@@ -578,6 +583,7 @@ class _RegisterPageState extends State<RegisterPage>
                                                 BlocProvider.of<LoginCubit>(
                                                         context)
                                                     .signUpNewWorker(
+                                                      userLocationCord: widget.userLocation,
                                                         daira:
                                                             response["address"]
                                                                 ['county'],

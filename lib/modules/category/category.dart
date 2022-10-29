@@ -2,6 +2,8 @@ import'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../shared/componants.dart';
+import '../../shared/theme.dart';
+import '../integratedsearch/searchhome.dart';
 import 'cubit/category_cubit.dart';
 class CategoryResultPage extends StatefulWidget{
   static String routeName='CategoryResultPage';
@@ -13,40 +15,38 @@ class CategoryResultPage extends StatefulWidget{
 }
 class _CategoryResultPageState extends State<CategoryResultPage> {
 String? paramPassed;
+
 @override
   void initState() {
     // TODO: implement initState
     super.initState();
     
   }
+  
   @override
   Widget build(BuildContext context) {
     paramPassed=ModalRoute.of(context)!.settings.arguments as String;
     return BlocProvider(
       create: (context) => CategoryCubit()..loadWorkerList(paramPassed!),
-      child: Scaffold(appBar: AppBar(),body:SafeArea(child:BlocBuilder<CategoryCubit, CategoryState>(
-        builder: (context, state) {
-          if(state is CatSearchResultLoading){
-            return Center(child:CircularProgressIndicator());
-          }else{
-            if(state is CatSearchResultDone ){
-              if(BlocProvider.of<CategoryCubit>(context).workersList.isEmpty){
-                return Center(child:Text('Ohhhhh no there is no results '));
-              }else{
-                return ListView.builder(itemCount:BlocProvider.of<CategoryCubit>(context).workersList.length , itemBuilder: ((context, index) {
-                return workerListTileBuilder(BlocProvider.of<CategoryCubit>(context).workersList[index]);
-                
-              }),);
-              }
-              
+      child:BlocBuilder<CategoryCubit, CategoryState>(
+        builder: (context, state) {return Scaffold(appBar: AppBar(actions: [
+        IconButton(onPressed: (){
+          Navigator.of(context).pushNamed(FilterSearchPage.routeName,arguments: paramPassed).then((value) => BlocProvider.of<CategoryCubit>(context).loadFiltredWorkerList(paramPassed!, value.toString()));
+        }, icon: Icon(Icons.filter_alt))
+      ]), body:
+          state is CatSearchResultLoading?
+           Center(child: CircularProgressIndicator())
+          :state is CatSearchResultFailed?Center(child: Text('There is somthing wrong')):
+           SafeArea(child: 
+            BlocProvider.of<CategoryCubit>(context).workersList.isEmpty?Center(child: Text('No Result found.',style: TextStyle(fontSize:20),)):
+            
+            ListView(children:
+             
+             BlocProvider.of<CategoryCubit>(context).workersList.map((e) =>workerListTileBuilder(e)).toList(),)
+            )
+        
+      ); })
 
-            }else{
-              return  Center(child:Text('Something Wrong try again '));
-            }
-          }
-          
-        },
-      ))),
     );
   }
 }

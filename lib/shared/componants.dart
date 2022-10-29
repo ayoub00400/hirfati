@@ -10,7 +10,65 @@ import '../modules/registerpage/registerpage.dart';
 
 
 Widget workerListTileBuilder(Map<String,dynamic> workerData){
-return Container(height: 100, child:Text(workerData['name']),);
+return GestureDetector(onTap: (){
+  
+},
+  child:   Container(margin:EdgeInsets.symmetric(horizontal:10,vertical: 8),decoration:BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),  height: 100, child:Row(
+  
+    children: [
+  
+      Padding(
+  
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+  
+        child: CircleAvatar(backgroundColor: Colors.amber,radius: 40,child: Center(child:Text(workerData['name'].toString()[0],style: TextStyle(fontSize:40,)))),
+  
+      ),
+  
+          Expanded(
+  
+            child: Container(padding: EdgeInsets.only(top: 8,bottom: 8,left: 8),
+  
+              //color:Colors.red,
+  
+              child: Column(mainAxisAlignment:MainAxisAlignment.center , crossAxisAlignment: CrossAxisAlignment.start,
+  
+                children: [
+  
+                  Row(
+  
+                    children: [
+  
+                      Text(workerData['name'],style: TextStyle(fontSize:22,fontWeight: FontWeight.bold)),Spacer(),
+  
+                      Text('5',style: TextStyle(fontSize:18)),
+  
+                      Padding(
+  
+                        padding: const EdgeInsets.only(right:8.0),
+  
+                        child: Icon(Icons.star,color: Color.fromARGB(255, 235, 220, 85)),
+  
+                      ),
+  
+                    ],
+  
+                  ),SizedBox(height:10),
+  
+                Row(children: [Icon(Icons.pin),SizedBox(width: 5,), Text(workerData['daira'].toString().split(' ').last+','+workerData['wilaya'].toString().split(' ').last,style: TextStyle(fontSize:16))])
+  
+                ],
+  
+              ),
+  
+            ),
+  
+          ),
+  
+    ],
+  
+  ),),
+);
 }
 
 

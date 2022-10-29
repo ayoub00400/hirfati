@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:meta/meta.dart';
 
 import '../../../main.dart';
@@ -37,7 +38,7 @@ class LoginCubit extends Cubit<LoginState> {
   signUpNewWorker(
       {required String email,
       required String password,
-      required String name,
+      required String name,required LatLng userLocationCord,
       required String phoneNumber,required String madina,required String daira,required String wilaya,required List<String>?jobs}) async {
     emit(RegisterLoading());
     Hirfati.myAuth
@@ -55,7 +56,9 @@ class LoginCubit extends Cubit<LoginState> {
           'madina':madina,
           'daira':daira,
           'wilaya':wilaya,
-          'jobs':jobs
+          'jobs':jobs,'locationlant':userLocationCord.latitude,
+          'locationlong':userLocationCord.longitude,
+          
         }).then((value) {
          
                   emit(RegisterDone());

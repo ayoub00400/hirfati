@@ -18,4 +18,15 @@ class CategoryCubit extends Cubit<CategoryState> {
   emit(CatSearchResultDone());
 } ).catchError((error)=>emit(CatSearchResultFailed()));
   }
+  loadFiltredWorkerList(String jobName,String wiayaValue){
+    emit(CatSearchResultLoading());
+    workersList.clear();
+    
+    Hirfati.myFirestore.collection('users').where("jobs",arrayContains:jobName ).where("wilaya",isEqualTo:wiayaValue).get().then((value) {
+      
+  value.docs.forEach((element) {workersList.add(element.data());});
+  print("zzzzzzz Russia zzzzzzzz"+workersList.toString());
+  emit(CatSearchResultDone());
+} ).catchError((error)=>emit(CatSearchResultFailed()));
+  }
 }
