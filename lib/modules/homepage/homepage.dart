@@ -8,13 +8,13 @@ import '../../shared/storege_helper.dart';
 import '../../shared/theme.dart';
 import '../../jobs.dart';
 import 'explore.dart';
-import 'notificationpag.dart';
+import 'messages.dart';
 import 'profilepage.dart';
 
 class HomePage extends StatelessWidget {
   //const OnboardingPages({Key? key}) : super(key: key);
   static final String routeName = 'HomePage';
-  List<Widget> homePages=[Explore(),NotificationPage(),ProfilePage()];
+  List<Widget> homePages=[Explore(),MassagesPage(),ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -25,9 +25,9 @@ class HomePage extends StatelessWidget {
                 builder: (context, state) {
                   return BottomNavigationBar(currentIndex: BlocProvider.of<HomepageCubit>(context).navBarIndex, onTap: (index) {
                     BlocProvider.of<HomepageCubit>(context).changePage(index);
-                  },selectedIconTheme:IconThemeData(color: Colors.purple[300],size:30 ) , items: [
+                  },selectedIconTheme:IconThemeData(color:  color_2.withOpacity(.7),size:30 ) , items: [
                           BottomNavigationBarItem(label: '', icon: Icon(Icons.home)),
-                          BottomNavigationBarItem(label: '', icon: Icon(Icons.notifications)),
+                          BottomNavigationBarItem(label: '', icon: Icon(Icons.message_outlined)),
                           BottomNavigationBarItem(label: '', icon: Icon(Icons.person)),
                         ]);
                 },

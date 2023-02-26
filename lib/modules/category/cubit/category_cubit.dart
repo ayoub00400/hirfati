@@ -14,7 +14,7 @@ class CategoryCubit extends Cubit<CategoryState> {
     Hirfati.myFirestore.collection('users').where("jobs",arrayContains:jobName ).get().then((value) {
       
   value.docs.forEach((element) {workersList.add(element.data());});
-  //print(workersList);
+  
   emit(CatSearchResultDone());
 } ).catchError((error)=>emit(CatSearchResultFailed()));
   }

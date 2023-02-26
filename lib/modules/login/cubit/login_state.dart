@@ -13,9 +13,7 @@ class LoginLoading extends LoginState {
 }
 
 
-class LoginDone extends LoginState {
 
-}
 class LoginFailed extends LoginState {
 String error;
 LoginFailed(this.error);
@@ -23,7 +21,9 @@ LoginFailed(this.error);
 ////////////////////
 
 
-class UserNotRegistred extends LoginState {
+class LoginDoneUserNotVerified extends LoginState {
+}
+class LoginDoneUserVerified extends LoginState {
 }
 
 class RegisterLoading extends LoginState {

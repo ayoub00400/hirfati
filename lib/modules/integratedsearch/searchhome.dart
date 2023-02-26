@@ -26,7 +26,7 @@ class _SearchPageState extends State<FilterSearchPage> {
   Widget build(BuildContext context) {
     String job=ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
-        appBar: AppBar(),
+        
         body: SafeArea(
             child: MultiBlocProvider(
           providers: [
@@ -88,13 +88,21 @@ class _SearchPageState extends State<FilterSearchPage> {
                                   
                       
                                 },
-                                style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),primary: Colors.purple,
                                     minimumSize: Size(170, 55), elevation: 4),
                                 child: Text('Done',style: TextStyle(fontSize: 23),))),
                        
                     ],
                   ),
                 ),
+                GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Icon(Icons.arrow_back_ios_new),
+                              )),
               ]);
             },
           ),

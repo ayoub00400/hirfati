@@ -26,7 +26,19 @@ loadFiltredWorkerList(List<String>jobName,String wiayaValue){
     Hirfati.myFirestore.collection('users').where("jobs",arrayContainsAny:jobName ).where("wilaya",isEqualTo:wiayaValue).get().then((value) {
       
   value.docs.forEach((element) {workersList.add(element.data());});
-  print("zzzzzzz Russia zzzzzzzz"+workersList.toString());
+  ///print("zzzzzzz Russia zzzzzzzz"+workersList.toString());
+  emit(SearchResultDone());
+} ).catchError((error)=>emit(SearchResultFailed()));
+  }
+
+  ////////////////
+  
+loadSearchWorkerListByJob(List<String>jobs){
+    emit(SearchResultLoading());
+    workersList.clear();
+     Hirfati.myFirestore.collection('users').where("jobs",arrayContainsAny:jobs ).get().then((value) {
+      
+  value.docs.forEach((element) {workersList.add(element.data());});
   emit(SearchResultDone());
 } ).catchError((error)=>emit(SearchResultFailed()));
   }

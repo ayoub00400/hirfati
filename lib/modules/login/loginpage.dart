@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hirfati/modules/homepage/explore.dart';
 import 'package:hirfati/modules/homepage/homepage.dart';
 import 'package:hirfati/modules/login/cubit/login_cubit.dart';
+import 'package:hirfati/modules/registerpage/emailregistrationcheck..dart';
 import 'package:hirfati/shared/theme.dart';
 import'package:hirfati/modules/RegisterPage/RegisterPage.dart';
 
@@ -17,9 +19,10 @@ class LoginPage extends StatelessWidget {
       create: (context) => LoginCubit(),
       child:  BlocListener<LoginCubit, LoginState>(
           listener: (context, state) {
-            if (state is LoginDone) {
+            if (state is  LoginDoneUserVerified) {
               Navigator.of(context).popAndPushNamed(HomePage.routeName);
             } else {
+
               if (state is LoginFailed) {
                 showDialog(
                     context: context,
@@ -27,7 +30,10 @@ class LoginPage extends StatelessWidget {
                       title: Text('Login Failed'),
                           content: Text(state.error),
                         ));
-              } else {}
+              } ;
+               if (state is  LoginDoneUserNotVerified) {
+              Navigator.of(context).popAndPushNamed(EmailCkeckPage.routeName,arguments: [Explore.routeName]);
+            };
             }
           },
           child: Container(
@@ -38,89 +44,54 @@ class LoginPage extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: 60,
-                      ),
-                      Image.asset(
-                        "assets/images/padlock.png",
-                        width: 120,
+                      ),CircleAvatar(minRadius: 70,backgroundColor: color_5,
+                        child: Image(image:
+                        AssetImage(
+                          "assets/images/logo.png",
+                          
+                        ),width: 120,),
                       ),
                       SizedBox(
                         height: 30,
                       ),
-                      Text('Login Panel',
+                      Text('Login ',
                           style: TextStyle(
                               fontSize: h1_txt + 10,
                               fontWeight: FontWeight.bold)),
                       SizedBox(
                         height: 40,
                       ),
-                      Form(
-                          key: myFormKey,
-                          child: Column(children: [
-                            Container(
-                              height: 50,
-                              child: TextFormField(
-                                  //autovalidateMode:AutovalidateMode.always ,
-                                  controller: emailFieldController,
-                                  validator: (_) {
-                                    if (emailFieldController.text == '') {
-                                      return 'empty field';
-                                    } else {
-                                      if (!RegExp(
-                                              '[a-z0-9]+@[a-z]+\.[a-z]{2,3}')
-                                          .hasMatch(
-                                              emailFieldController.text)) {
-                                        return 'Wrong email format';
-                                      } else {
-                                        return null;
-                                      }
-                                    }
-                                  },
-                                  cursorColor: Colors.amber,
-                                  decoration: InputDecoration(
-                                      isDense: true,
-                                      hintText: 'Email:',
-                                      focusColor: Colors.amber,
-                                      errorBorder: InputBorder.none,
-                                      focusedErrorBorder: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: BorderSide(
-                                              color: Color.fromARGB(
-                                                  131, 243, 8, 231))),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)))),
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Container(
+                      Container(
+                        margin:EdgeInsets.symmetric(horizontal: 10),
+                        child: Form(
+                            key: myFormKey,
+                            child: Column(children: [
+                              Container(
                                 height: 50,
                                 child: TextFormField(
                                     //autovalidateMode:AutovalidateMode.always ,
-                                    controller: passwordFieldController,
+                                    controller: emailFieldController,
                                     validator: (_) {
-                                      if (passwordFieldController
-                                          .text.isEmpty) {
+                                      if (emailFieldController.text == '') {
                                         return 'empty field';
                                       } else {
-                                        if (passwordFieldController
-                                                .text.length <
-                                            6) {
-                                          return 'password must be at least 6 characters';
+                                        if (!RegExp(
+                                                '[a-z0-9]+@[a-z]+\.[a-z]{2,3}')
+                                            .hasMatch(
+                                                emailFieldController.text)) {
+                                          return 'Wrong email format';
                                         } else {
                                           return null;
                                         }
                                       }
                                     },
-                                    cursorColor: Colors.amber,
-                                    obscureText: true,
+                                    cursorColor: color_5,
                                     decoration: InputDecoration(
+                                        isDense: true,
+                                        hintText: 'Email:',
+                                        focusColor: Colors.amber,
                                         errorBorder: InputBorder.none,
                                         focusedErrorBorder: InputBorder.none,
-                                        isDense: true,
-                                        hintText: 'password:',
                                         focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20),
@@ -129,8 +100,48 @@ class LoginPage extends StatelessWidget {
                                                     131, 243, 8, 231))),
                                         enabledBorder: OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(20)))))
-                          ])),
+                                                BorderRadius.circular(20)))),
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Container(
+                                  height: 50,
+                                  child: TextFormField(
+                                      //autovalidateMode:AutovalidateMode.always ,
+                                      controller: passwordFieldController,
+                                      validator: (_) {
+                                        if (passwordFieldController
+                                            .text.isEmpty) {
+                                          return 'empty field';
+                                        } else {
+                                          if (passwordFieldController
+                                                  .text.length <
+                                              6) {
+                                            return 'password must be at least 6 characters';
+                                          } else {
+                                            return null;
+                                          }
+                                        }
+                                      },
+                                      cursorColor: color_5,
+                                      obscureText: true,
+                                      decoration: InputDecoration(
+                                          errorBorder: InputBorder.none,
+                                          focusedErrorBorder: InputBorder.none,
+                                          isDense: true,
+                                          hintText: 'password:',
+                                          focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              borderSide: BorderSide(
+                                                  color: Color.fromARGB(
+                                                      131, 243, 8, 231))),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20)))))
+                            ])),
+                      ),
                       SizedBox(
                         height: 30,
                       ),
@@ -143,10 +154,10 @@ class LoginPage extends StatelessWidget {
                                 BlocProvider.of<LoginCubit>(context).loginUser(email: emailFieldController.text, password: passwordFieldController.text);
                               } else {}
                             },
-                            color: Colors.amber,
+                            color: color_5.withOpacity(.8),
                             height: 46,
                             minWidth: 150,
-                            child: state is LoginLoading ?CircularProgressIndicator(color: Colors.white,) : Text('Log in'),
+                            child: state is LoginLoading ?CircularProgressIndicator(color: Colors.white,) : Text('Log in',style:TextStyle(color:Colors.white)),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
                           );
@@ -155,7 +166,7 @@ class LoginPage extends StatelessWidget {
                       SizedBox(height: 20),
                       GestureDetector(
                           onTap: () {}, child: Text('Forget password ?')),
-                      SizedBox(height: 60),
+                      SizedBox(height: 35),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -167,7 +178,7 @@ class LoginPage extends StatelessWidget {
                               child: Text('Register.',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.amber,
+                                      color: color_5.withOpacity(.7),
                                       fontWeight: FontWeight.bold)))
                         ],
                       ),

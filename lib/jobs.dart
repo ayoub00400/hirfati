@@ -1,26 +1,31 @@
-List<Map<String, String>> jobData = [
-  {'jobtitle': 'Painting', 'jobdescription': '', 'img_path': 'paint-roller.png'},
+List<Map<String, String>> jobData = [{'jobtitle': 'painting', 'jobdescription': '', 'img_path': 'paint-roller.png'},
+{'jobtitle': 'painting', 'jobdescription': '', 'img_path': 'paint-roller.png'},
+{'jobtitle': 'painting', 'jobdescription': '', 'img_path': 'paint-roller.png'},
+{'jobtitle': 'painting', 'jobdescription': '', 'img_path': 'paint-roller.png'}
+,{'jobtitle': 'painting', 'jobdescription': '', 'img_path': 'paint-roller.png'},
+{'jobtitle': 'painting', 'jobdescription': '', 'img_path': 'paint-roller.png'},
+  {'jobtitle': 'painting', 'jobdescription': '', 'img_path': 'paint-roller.png'},
   {
-    'jobtitle': 'Electricity',
+    'jobtitle': 'electricity',
     'jobdescription': '',
     'img_path': 'electricity-sign.png'
   },
-  {'jobtitle': 'Plumbing', 'jobdescription': '', 'img_path': 'pipe-wrench.png'},
-  {'jobtitle': 'Mansory', 'jobdescription': '', 'img_path': 'trowel.png'},
-  {'jobtitle': 'Cooking', 'jobdescription': '', 'img_path': 'babysitter.png'},
-  {'jobtitle': 'Repair', 'jobdescription': '', 'img_path': 'babysitter.png'},
+  {'jobtitle': 'plumbing', 'jobdescription': '', 'img_path': 'pipe-wrench.png'},
+  {'jobtitle': 'mansory', 'jobdescription': '', 'img_path': 'trowel.png'},
+  {'jobtitle': 'cooking', 'jobdescription': '', 'img_path': 'babysitter.png'},
+  {'jobtitle': 'repair', 'jobdescription': '', 'img_path': 'babysitter.png'},
   {
     'jobtitle': 'Babysitting',
     'jobdescription': '',
     'img_path': 'babysitter.png',
   },
   {
-    'jobtitle': 'Taxi Driver',
+    'jobtitle': 'taxi Driver',
     'jobdescription': '',
     'img_path': 'taxi.png'
   },
   {
-    'jobtitle': 'Private Courses',
+    'jobtitle': 'private courses',
     'jobdescription': '',
     'img_path': 'course.png'
   },
@@ -30,7 +35,7 @@ List<Map<String, String>> jobData = [
     'img_path': 'sewing-machine.png'
   },
   {
-    'jobtitle': 'Auto Mechanics',
+    'jobtitle': 'auto mechanics',
     'jobdescription': '',
     'img_path': 'babysitter.png'
   },
